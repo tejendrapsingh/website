@@ -1,0 +1,51 @@
+baseurl = "https://tejendrapsingh.net/"
+title = "Tejendra Pratap Singh"
+author = "Tejendra Pratap Singh"
+canonifyurls = true
+relativeURLs = true
+languagecode = "en"
+paginate = 3
+theme = "hugo-renga"
+
+enableEmoji = true
+hasCJKLanguage = true
+
+googleAnalytics = "UA-149362210-1"
+# disqusShortname = "your-disqus-shortname"
+
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[params]
+pagetitle = "Tejendra Pratap Singh"
+copyright = "© 2021 Tejendra Pratap Singh"
+copyrightUrl = "https://tejendrapsingh.net/"
+#faviconfile = "image/favicon.png"
+#logofile = ""
+posts_navigation = true
+uselatex = true
+highlightjs = true
+progressively = false
+
+#github = "tejendrapsingh"
+twitter = "tejendrapsingh"
+linkedin = "tejendra-pratap-singh-01210889"
+email = "singh.pratap.tejendra@gmail.com"
+#google-scholar = "hi"
+
+
+[[menu.primary]]
+identifier = "research"
+name = "Research"
+url = "/research/"
+weight = 2
+
+[[menu.primary]]
+identifier = "CV"
+name = "CV"
+url = "/pdf/CV_Tejendra_2.pdf"
+weight = 3
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
