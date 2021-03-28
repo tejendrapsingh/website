@@ -37,6 +37,12 @@
                         <img class="icon" src="{{ .Site.BaseURL }}img/twitter.svg" alt="Twitter" />
                     </a>
                     {{ end }}
+                    
+                    {{ if .Site.Params.googlescholar }}
+                    <a href="https://scholar.google.com/{{ .Site.Params.googlescholar }}" target="_blank">
+                        <img class="icon" src="{{ .Site.BaseURL }}img/googlescholar.svg" alt="Google Scholar" />
+                    </a>
+                    {{ end }}
 
                     {{ if .Site.Params.linkedin }}
                     <a href="https://www.linkedin.com/in/{{ .Site.Params.linkedin }}" target="_blank">
@@ -73,6 +79,7 @@
                             <img class="icon" src="{{ .Site.BaseURL }}img/rss.svg" alt="RSS" />
                         </a>
                     {{ end }}
+                    
 
                     {{ if .IsTranslated }}
                         <br />

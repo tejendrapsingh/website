@@ -28,9 +28,9 @@ progressively = false
 
 #github = "tejendrapsingh"
 twitter = "tejendrapsingh"
-linkedin = "tejendra-pratap-singh-01210889"
+#linkedin = "tejendra-pratap-singh-01210889"
 email = "singh.pratap.tejendra@gmail.com"
-#google-scholar = "hi"
+googlescholar = "citations?user=VZBZmLYAAAAJ&hl=en"
 
 
 [[menu.primary]]
