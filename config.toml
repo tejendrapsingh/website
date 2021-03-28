@@ -34,6 +34,12 @@ email = "singh.pratap.tejendra@gmail.com"
 
 
 [[menu.primary]]
+identifier = "home"
+name = "Home"
+url = "/index.html"
+weight = 1
+
+[[menu.primary]]
 identifier = "research"
 name = "Research"
 url = "/research/"
