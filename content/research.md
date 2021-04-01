@@ -15,4 +15,4 @@ slug: research
 
 ## Work in progress
 
-1. Does School Closure affect Educational Outcomes: Evidence from a Natural Experiment (with [Soham Sahoo](http://www.iimb.ac.in/profile/86)) 
+1. Does School Closure affect Educational Outcomes: Evidence from a Natural Experiment (with Soham Sahoo) 
