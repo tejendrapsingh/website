@@ -43,6 +43,12 @@
                         <img class="icon" src="{{ .Site.BaseURL }}img/googlescholar.svg" alt="Google Scholar" />
                     </a>
                     {{ end }}
+                    
+                    {{ if .Site.Params.osf }}
+                    <a href="https://osf.io/{{ .Site.Params.osf }}" target="_blank">
+                        <img class="icon" src="{{ .Site.BaseURL }}img/osf.svg" alt="OSF" />
+                    </a>
+                    {{ end }}
 
                     {{ if .Site.Params.linkedin }}
                     <a href="https://www.linkedin.com/in/{{ .Site.Params.linkedin }}" target="_blank">
