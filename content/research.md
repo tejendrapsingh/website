@@ -8,7 +8,7 @@ slug: research
 
 1. Up in the Air: Air Pollution and Crime – Evidence from India (with Sujata Visaria)
     - [SocArXiv Working Paper](https://doi.org/10.31235/osf.io/hs4xj) 
-2. Beyond The Haze: Air Pollution and Student Absenteeism - Evidence from India
+2. Beyond The Haze: Air Pollution and Student Absenteeism – Evidence from India
     - [SSRN Working Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3680588)     
 3. (Mis)allocation and Culture: Do the Two Tango? 
     - (Draft available upon request)
