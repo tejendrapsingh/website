@@ -17,7 +17,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
 pagetitle = "Tejendra Pratap Singh"
-copyright = "© 2021 Tejendra Pratap Singh"
+copyright = "© 2022 Tejendra Pratap Singh"
 copyrightUrl = "https://tejendrapsingh.net/"
 #faviconfile = "image/favicon.png"
 #logofile = ""
