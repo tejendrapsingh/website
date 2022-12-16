@@ -6,7 +6,7 @@ slug: research
 
 ## Working papers 
 
-1. Air Pollution and Student Achievement: Evidence from Africa (with Erica Mtenga)
+1. Air Pollution and Student Achievement: Evidence from Tanzania (with Erica Mtenga)
     - <a href="https://doi.org/10.31219/osf.io/nm9dx" target="_blank">SocArXiv Working Paper</a>
 2. Up in the Air: Air Pollution and Crime – Evidence from India (with Sujata Visaria)
     - <a href="https://osf.io/preprints/socarxiv/hs4xj/" target="_blank">SocArXiv Working Paper</a>   
