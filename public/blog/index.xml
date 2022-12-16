@@ -14,7 +14,7 @@
       
       <guid>/blog/post/hello-markdown/</guid>
       <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
- You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
+You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc. There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
     </item>
     
     <item>
@@ -24,7 +24,7 @@
       
       <guid>/blog/post/hugo-renga-theme-demo/</guid>
       <description>Renga is a Bootstrap-based minimalist theme for Hugo.
-Features  Minimalist Responsive &amp;amp; mobile-first (Bootstrap 4) Native font stack High Contrast Math typesetting (MathJaX) Syntax highlighting (highlight.js) Progressive image loading (progressively.js) Disqus Google Analytics Open Graph meta tags Twitter Cards meta tags  Typography h1 Heading h2 Heading h3 Heading h4 Heading h5 Heading h6 Heading  This is bold text
+Features Minimalist Responsive &amp;amp; mobile-first (Bootstrap 4) Native font stack High Contrast Math typesetting (MathJaX) Syntax highlighting (highlight.js) Progressive image loading (progressively.js) Disqus Google Analytics Open Graph meta tags Twitter Cards meta tags Typography h1 Heading h2 Heading h3 Heading h4 Heading h5 Heading h6 Heading This is bold text
 This is bold text
 This is italic text
 This is italic text</description>
