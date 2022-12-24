@@ -1,5 +1,5 @@
 ---
 title: "Blog"
 menu: "main"
-description: "Jane Doe's blog"
+description: "Tejendra's blog"
 ---
