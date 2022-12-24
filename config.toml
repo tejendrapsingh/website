@@ -13,8 +13,6 @@ hasCJKLanguage = true
 #googleAnalytics = "G-NH0PZWJWJN"
 # disqusShortname = "your-disqus-shortname"
 
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-
 [params]
 pagetitle = "Tejendra Pratap Singh"
 copyright = "© 2022 Tejendra Pratap Singh"
