@@ -1,7 +1,7 @@
 ---
 title: "Making maps in R"
 author: "Tejendra Pratap Singh"
-date: "2022-12-24"
+date: "2022-12-22T12:00:00-07:00"
 output: html_document
 bibliography: references.bib
 csl: journal-of-environmental-economics-and-management.csl
