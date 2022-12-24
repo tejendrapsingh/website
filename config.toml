@@ -58,7 +58,7 @@ weight = 3
 [[menu.primary]]
 identifier = "blog"
 name = "Blog"
-url = "/blog/post/"
+url = "/blog/"
 weight = 4
 
 [markup]

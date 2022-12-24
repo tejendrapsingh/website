@@ -5,6 +5,7 @@ date: "2022-12-24T12:00:00-07:00"
 output: html_document
 bibliography: references.bib
 csl: journal-of-environmental-economics-and-management.csl
+draft: true
 ---
 
 
@@ -58,7 +59,7 @@ poll.dt &lt;- terra::mask(x = poll.dt,
                        mask = us.shp)</code></pre>
 <p>I now plot the map.</p>
 <pre class="r"><code>terra::plot(x = poll.dt, type = &#39;continuous&#39;, pax = list(labels = FALSE, tick = FALSE), maxcell = 300000000000000000)</code></pre>
-<p><img src="/blog/post/hello-markdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/blog/post/maps_in_r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <div id="references" class="section level4 unnumbered">
 <h4>References</h4>
 <div id="refs" class="references csl-bib-body hanging-indent">
