@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Making maps in R - Tejendra Pratap Singh </title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="" />
+    <meta property="og:site_name" content="Tejendra Pratap Singh" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="/blog/post/maps_in_r/" />
+    <meta property="og:title" content="Making maps in R" />
+    <meta property="og:image" content="/" />
+    <meta property="og:description" content="" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@tejendrapsingh">
+    <meta name="twitter:creator" content="@tejendrapsingh">
+    
+    <meta name="twitter:title" content="Making maps in R" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image" content="/" />
+
+    <link rel="canonical" href="../../../blog/post/maps_in_r/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../../../css/custom.css" />
+
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/tomorrow.min.css" integrity="sha256-0QU8ry64q+N6YBIEF/6XF6vUeF15gbNO4tLS6ikk0FI=" crossorigin="anonymous" />
+    
+
+    
+
+    <link rel="shortcut icon"
+        href="../../../img/favicon.ico">
+
+    
+        <link href="../../../index.xml" rel="alternate" type="application/rss+xml" title="Tejendra Pratap Singh" />
+    
+
+    
+        
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NH0PZWJWJN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NH0PZWJWJN');
+</script>
+    
+</head>
+
+<body>
+    
+    <div class="my-4 my-md-5 header">
+    <div class="container">
+        <div class="row">
+            <div class="col-auto offset-md-1 d-none d-md-block">
+                
+            </div>
+            <div class="col-auto align-self-center mr-auto">
+                <a href="../../../">
+                    <h1 class="name">Tejendra Pratap Singh</h1>
+                </a>
+
+                <ul class="nav nav-primary">
+                    
+                        <li class="nav-item">
+                            <a class="text-uppercase nav-link text-home" href="../../../">
+                                
+                                Home
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item">
+                            <a class="text-uppercase nav-link text-research" href="../../../research/">
+                                
+                                Research
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item">
+                            <a class="text-uppercase nav-link text-CV" href="../../../pdf/cv_tejendra_2.pdf">
+                                
+                                CV
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item">
+                            <a class="text-uppercase nav-link text-blog" href="../../../blog/">
+                                
+                                Blog
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-10">
+                    <h1 class="mx-0 mx-md-4 blog-post-title">Making maps in R</h1>
+
+                    <div class="mb-md-4 meta">
+                        
+                            
+                        
+
+                        <span class="date middot" title='Sat Dec 24 2022 09:58:20 EST'>
+                            2022-12-24
+                        </span>
+
+                        <span class="reading-time middot">
+                            2 minute read
+                        </span>
+
+                        <div class="d-none d-md-inline tags">
+                            <ul class="list-unstyled d-inline">
+                                
+                            </ul>
+                        </div>
+
+                        <div class="d-none d-md-inline tags">
+                            <ul class="list-unstyled d-inline">
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="markdown">
+                        
+    <p>I recently shifted from using the <code>raster</code> package for spatial data to using the incredibly versatile and fast <code>terra</code> package. Since, <code>tmap</code> does not provide direct integration with <code>terra</code> objects, I wrote this post to show how <code>terra</code> allows for plotting nice graphics using it&rsquo;s inbuilt functions.</p>
+<p>I am going to create a map of continental United States with the spatial distribution of annual $PM2.5$ concentration for 2019. I use $PM2.5$ concentration data from <a href="https://sites.wustl.edu/acag/datasets/surface-pm2-5/">Atmospheric Composition Analysis Group</a> [@vandonkelaaretal2021].</p>
+<p>We begin by loading our required packages.</p>
+<pre tabindex="0"><code>rm(list=ls())
+gc()
+
+#load required packages
+require(data.table)
+require(here)
+require(pbapply) 
+library(terra)
+
+# check root directory
+here::here()
+</code></pre><p>I use the United States Census Bureau shapefile which can be downloaded from <a href="https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip">here</a>. I now import the shapefile.</p>
+<pre tabindex="0"><code>us.shp &lt;- terra::vect(x = here::here(&#39;static&#39;, &#39;data&#39;, &#39;shapefile&#39;, &#39;cb_2018_us_state_500k&#39;, &#39;cb_2018_us_state_500k.shp&#39;))
+print(us.shp)
+</code></pre><p>I subset the shapefile by removing the states that are not part of continental United States.</p>
+<pre tabindex="0"><code>us.shp &lt;- us.shp[us.shp$NAME %in% us.shp$NAME[!us.shp$NAME %in% c(&#34;Puerto Rico&#34;, &#34;American Samoa&#34;, &#34;United States Virgin Islands&#34;, &#34;Hawaii&#34;, &#34;Guam&#34;, &#34;Commonwealth of the Northern Mariana Islands&#34;, &#34;Alaska&#34;)],]
+us.shp &lt;- terra::project(x = us.shp, y = &#39;EPSG:5070&#39;)
+</code></pre><p>I now import the $PM2.5$ concentration data for 2019.</p>
+<pre tabindex="0"><code>poll.dt &lt;- terra::rast(x = here::here(&#39;static&#39;, &#39;data&#39;, &#39;pollution&#39;, &#39;V5GL03.HybridPM25.NorthAmerica.201901-201912.nc&#39;),
+                       subds = c(&#39;GWRPM25&#39;),
+                       lyrs = 1L)
+</code></pre><p>I now subset the $PM2.5$ concentration raster layer for the continental United States.</p>
+<pre tabindex="0"><code>poll.dt &lt;- terra::project(x = poll.dt,
+                          y = &#39;EPSG:5070&#39;)
+poll.dt &lt;- terra::crop(x = poll.dt,
+                       y = us.shp)
+poll.dt &lt;- terra::mask(x = poll.dt,
+                       mask = us.shp)
+</code></pre><p>I now plot the map.</p>
+<pre tabindex="0"><code>terra::plot(x = poll.dt, type = &#39;continuous&#39;, pax = list(labels = FALSE, tick = FALSE), maxcell = 300000000000000000)
+</code></pre><h4 id="references">References</h4>
+
+
+
+                    </div>
+
+                    
+                        <div class="navigation">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="comments">
+
+      <div class="py-3 content">
+            <div class="container">
+                  <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-10">
+                              <div class="comments">
+                                    <div id="disqus_thread"></div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <script type="text/javascript">
+            (function () {
+                  
+                  
+                  if (window.location.hostname == "localhost")
+                        return;
+
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  var disqus_shortname = '';
+                  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+      </script>
+      <noscript>
+            Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+      </noscript>
+</section>
+    <div class="my-4 footer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-5">
+                
+                    <div class="mx-0 mx-md-4 text-left">
+                        
+                            <a href="https://tejendrapsingh.net/">© 2022 Tejendra Pratap Singh</a>
+                        
+                    </div>
+                
+            </div>
+            <div class="col-sm-12 col-md-5">
+                <div class="mx-0 mx-md-4 text-right">
+                    
+                        <a href="https://github.com/tejendrapsingh" target="_blank">
+                            <img class="icon" src="../../../img/github.svg" alt="GitHub" />
+                        </a>
+                    
+
+                    
+
+                    
+
+                    
+                    <a href="https://twitter.com/tejendrapsingh" target="_blank">
+                        <img class="icon" src="../../../img/twitter.svg" alt="Twitter" />
+                    </a>
+                    
+                    
+                    
+                    <a href="https://scholar.google.com/citations?user=VZBZmLYAAAAJ&amp;hl=en" target="_blank">
+                        <img class="icon" src="../../../img/googlescholar.svg" alt="Google Scholar" />
+                    </a>
+                    
+                    
+                    
+                    <a href="https://osf.io/f6dcv" target="_blank">
+                        <img class="icon" src="../../../img/osf.svg" alt="OSF" />
+                    </a>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <a href="mailto:singh.pratap.tejendra@gmail.com">
+                        <img class="icon" src="../../../img/email.svg" alt="Email" />
+                    </a>
+                    
+                    
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js" integrity="sha256-sNPiigbfSkqUzMc5rgrdztLnneCMAp6W9wetJUZu9Zw=" crossorigin="anonymous"></script>
+        
+        <script>
+            window.addEventListener('load', function() {
+                hljs.initHighlighting();
+            }, true);
+        </script>
+    
+
+    
+
+    
+    
+        
+<script src="../../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+</body>
+
+</html>
