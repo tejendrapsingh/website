@@ -25,6 +25,7 @@ posts_navigation = true
 uselatex = true
 highlightjs = true
 progressively = false
+math = true
 
 # Google Analytics 4
 GoogleAnalyticsID = "G-NH0PZWJWJN"
@@ -54,6 +55,12 @@ identifier = "CV"
 name = "CV"
 url = "/pdf/CV_Tejendra_2.pdf"
 weight = 3
+
+[[menu.primary]]
+identifier = "blog"
+name = "Blog"
+url = "/blog/"
+weight = 4
 
 [markup]
   [markup.goldmark]
