@@ -25,7 +25,6 @@ posts_navigation = true
 uselatex = true
 highlightjs = true
 progressively = false
-math = true
 
 # Google Analytics 4
 GoogleAnalyticsID = "G-NH0PZWJWJN"
