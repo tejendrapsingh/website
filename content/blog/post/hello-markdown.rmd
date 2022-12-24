@@ -1,0 +1,61 @@
+---
+title: "Making maps in R"
+author: "Tejendra Pratap Singh"
+date: "2022-12-24T12:00:00-07:00"
+output: html_document
+bibliography: references.bib
+csl: journal-of-environmental-economics-and-management.csl
+---
+
+I recently shifted from using the `raster` package for spatial data to using the incredibly versatile and fast `terra` package. Since, `tmap` does not provide direct integration with `terra` objects, I wrote this post to show how `terra` allows for plotting nice graphics using it's inbuilt functions.
+
+I am going to create a map of continental United States with the spatial distribution of annual $PM2.5$ concentration for 2019. I use $PM2.5$ concentration data from [Atmospheric Composition Analysis Group](https://sites.wustl.edu/acag/datasets/surface-pm2-5/) [@vandonkelaaretal2021].
+
+We begin by loading our required packages.
+```{r, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+rm(list=ls())
+gc()
+
+#load required packages
+require(data.table)
+require(here)
+require(pbapply) 
+library(terra)
+
+# check root directory
+here::here()
+```
+I use the United States Census Bureau shapefile which can be downloaded from [here](https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_state_500k.zip). I now import the shapefile.
+
+```{r, echo=TRUE}
+us.shp <- terra::vect(x = here::here('static', 'data', 'shapefile', 'cb_2018_us_state_500k', 'cb_2018_us_state_500k.shp'))
+print(us.shp)
+```
+I subset the shapefile by removing the states that are not part of continental United States.
+```{r, echo=TRUE}
+us.shp <- us.shp[us.shp$NAME %in% us.shp$NAME[!us.shp$NAME %in% c("Puerto Rico", "American Samoa", "United States Virgin Islands", "Hawaii", "Guam", "Commonwealth of the Northern Mariana Islands", "Alaska")],]
+us.shp <- terra::project(x = us.shp, y = 'EPSG:5070')
+```
+I now import the $PM2.5$ concentration data for 2019.
+```{r, echo=TRUE}
+poll.dt <- terra::rast(x = here::here('static', 'data', 'pollution', 'V5GL03.HybridPM25.NorthAmerica.201901-201912.nc'),
+                       subds = c('GWRPM25'),
+                       lyrs = 1L)
+```
+
+I now subset the $PM2.5$ concentration raster layer for the continental United States.
+```{r, echo=TRUE}
+poll.dt <- terra::project(x = poll.dt,
+                          y = 'EPSG:5070')
+poll.dt <- terra::crop(x = poll.dt,
+                       y = us.shp)
+poll.dt <- terra::mask(x = poll.dt,
+                       mask = us.shp)
+```
+
+I now plot the map.
+```{r}
+terra::plot(x = poll.dt, type = 'continuous', pax = list(labels = FALSE, tick = FALSE), maxcell = 300000000000000000)
+```
+
+#### References
