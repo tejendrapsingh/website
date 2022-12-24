@@ -5,6 +5,7 @@ date: "2022-12-24T12:00:00-07:00"
 output: html_document
 bibliography: references.bib
 csl: journal-of-environmental-economics-and-management.csl
+draft: true
 ---
 
 I recently shifted from using the `raster` package for spatial data to using the incredibly versatile and fast `terra` package. Since, `tmap` does not provide direct integration with `terra` objects, I wrote this post to show how `terra` allows for plotting nice graphics using it's inbuilt functions.
